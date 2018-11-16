@@ -1,0 +1,7 @@
+# For the ESP32
+esptool
+rshell
+wheel
+
+# For the mqtt client writing to our db
+paho-mqtt
