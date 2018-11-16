@@ -1,4 +1,5 @@
 /venv
-esp32*.bin
-
 .vscode/
+
+esp32*.bin
+room_data.json
