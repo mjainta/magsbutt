@@ -5,7 +5,7 @@ My ass got saved by using tests today.
 # How to set it up
 
 Pre-requisites:
-* An ESP32 with a button connected to D5 (Pin34 internally)
+* An ESP32 with a button connected to D21 (Pin21 internally)
 * A MQTT broker, your laptop is sufficient (for example mosquitto)
 * Python3 installed
 * A WLAN network in which the ESP, the MQTT broker and MQTT client are in
@@ -36,6 +36,7 @@ mosquitto_sub -v -h localhost -p 1883 -t '#'
 Ramp up the ESP32
 ```bash
 rshell --port /dev/ttyUSB0
+cp boot.py /pyboard/boot.py
 cp main.py /pyboard/main.py
 repl
 ```
