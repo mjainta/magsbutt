@@ -47,3 +47,16 @@ python3 client.py
 ```
 
 Now, push the button and look at your terminals.
+
+# Using the ELK stack
+
+You probably need to change the max_map_count setting of your system
+
+```bash
+sudo sysctl -w vm.max_map_count=262144
+```
+
+Then start the ELK stack in docker containers
+```bash
+docker run --rm -e MAX_MAP_COUNT=262144 -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
+```

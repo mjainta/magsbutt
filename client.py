@@ -1,8 +1,10 @@
 import configparser
+from datetime import datetime
 import json
 import os
 import re
 
+from elasticsearch import Elasticsearch
 import paho.mqtt.client as mqtt
 
 
@@ -50,6 +52,8 @@ def log_increase(room):
     room_file.write(json.dumps(room_data))
     room_file.close()
 
+    if config['ELASTIC']['ACTIVE'] == "True":
+        es.index(index="magsbutt", doc_type="test-type", body={"room": room, "count": room_data[room]['magsbutt_count'], "timestamp": datetime.now()})
 
 config = configparser.ConfigParser()
 config.read('magsbutt.ini')
@@ -61,6 +65,10 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 client.connect(config['MQTT']['SERVER'], int(config['MQTT']['PORT']), 60)
+
+if config['ELASTIC']['ACTIVE'] == "True":
+    es = Elasticsearch()
+    es.indices.create(index='magsbutt', ignore=400)
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.

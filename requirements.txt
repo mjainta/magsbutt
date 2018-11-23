@@ -5,3 +5,4 @@ wheel
 
 # For the mqtt client writing to our db
 paho-mqtt
+elasticsearch
